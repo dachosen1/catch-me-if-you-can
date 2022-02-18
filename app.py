@@ -2,9 +2,7 @@ import numpy as np
 import pandas as pd
 import plotly.figure_factory as ff
 import streamlit as st
-import scipy
-
-import altair as alt
+from model import score_model
 
 st.title("Accenture Hackathon")
 st.markdown("**Team**: Cath me if you can")
@@ -64,5 +62,6 @@ new_balance = st.sidebar.number_input("customer's balance after the transaction"
 if st.sidebar.button('Run'):
     st.info("""The Machine Learning Algorithm predicts the following based on the selected input 
             """)
-    st.write('Number of hardcoded')
-    st.write("Predicted Label", 26, "Predicted Probability", 45)
+
+    score = score_model(data=data)
+    st.write("Predicted Fraud", score[0])
