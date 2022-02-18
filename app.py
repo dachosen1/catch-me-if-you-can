@@ -1,13 +1,11 @@
-import altair as alt
-import numpy as np
 import pandas as pd
-import plotly.figure_factory as ff
 import streamlit as st
+
 from model import score_model
 
 st.title("Accenture Hackathon")
-st.markdown("**Team**: Cath me if you can")
-st.markdown("**Problem Statement**: Anomally detection for financial services")
+st.markdown("**Team**: Catch me if you can")
+st.markdown("**Problem Statement**: Anomaly detection for financial services")
 st.markdown("The financial services sector is one of the first in line to pick up the benefits of AI and Machine "
             "Learning. Digital banking opened the sector to new fraud scenarios, which are posing a great challenge "
             "for human analysts, due to their complexity, speed and scale. In this scenario you will use a dataset "
@@ -48,8 +46,13 @@ data = pd.DataFrame([{
 }])
 
 if st.sidebar.button('Run'):
-    st.info("""The Machine Learning Algorithm predicts the following based on the selected input 
+
+    st.info(""" 
+    The application uses a light GPM model to classify transactions as Fraud!  
+            """)
+
+    st.info("""Is the Transaction Fraud? 
             """)
 
     score = score_model(data=data)
-    st.write("Predicted Fraud", score[0])
+    st.header(score[0])
