@@ -10,3 +10,5 @@ venv/
 .config/
 
 .dockerignore
+
+__pycache__
