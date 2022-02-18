@@ -15,7 +15,7 @@ st.markdown("The financial services sector is one of the first in line to pick u
 
 unit_of_time = st.sidebar.number_input('step', 0, 100000000000000, 250)
 transaction_amount = st.sidebar.number_input('amount', 0, 100000000000, 1000)
-payment_type = st.sidebar.selectbox(label="Type", options=["TRANSFER", "Cash-In", "Cash-Out", "DEBIT", "PAYMENT"])
+payment_type = st.sidebar.selectbox(label="Type", options=["TRANSFER", "CASH-IN", "CASH-OUT", "DEBIT", "PAYMENT"])
 
 name_origin = st.sidebar.text_input("nameOrig", "C353296011")
 old_balance_org = st.sidebar.number_input("oldbalanceOrg", 0, 100000000000, 105867)
