@@ -48,7 +48,7 @@ data = pd.DataFrame([{
 if st.sidebar.button('Run'):
 
     st.info(""" 
-    The application uses a lightGBM model to classify transactions as fraud!  
+    The application uses a LightGBM model to classify transactions as fraud!  
             """)
 
     st.info("""Is the transaction fraud? 
