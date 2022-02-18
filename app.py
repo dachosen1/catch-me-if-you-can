@@ -13,33 +13,37 @@ st.markdown("The financial services sector is one of the first in line to pick u
             "for human analysts, due to their complexity, speed and scale. In this scenario you will use a dataset "
             "created specifically for fraud detection in financial services.")
 
-unit_of_time = st.sidebar.number_input('Unit of time in the real world', 1, 1000, 100)
-transaction_amount = st.sidebar.number_input('Amount of the Transaction', 1, 100000000000, 1000)
-payment_type = st.sidebar.selectbox(label="Payment Type", options=["Cash-In", "Cash-Out", "Debit", "Payment", "Transfer"])
+unit_of_time = st.sidebar.number_input('step', 1, 1000, 250)
+transaction_amount = st.sidebar.number_input('amount', 1, 100000000000, 1000)
+payment_type = st.sidebar.selectbox(label="Type", options=["Cash-In", "Cash-Out", "DEBIT", "PAYMENT", "TRANSFER"])
 
-old_balance_org = st.sidebar.number_input("Initial balance before the transaction", 1, 100000000000, 1000)
-new_balance_org = st.sidebar.number_input("customer's balance after the transaction", 1, 100000000000, 1000)
+name_origin = st.sidebar.text_input("nameOrig")
+old_balance_org = st.sidebar.number_input("oldbalanceOrg", 1, 100000000000, 1000)
+new_balance_org = st.sidebar.number_input("newbalanceOrig", 1, 100000000000, 1000)
 
-old_balance_dest = st.sidebar.number_input("Initial recipient balance before the transaction", 1, 100000000000, 1000)
-new_balance_dest = st.sidebar.number_input("Recipient's balance after the transaction", 1, 100000000000, 1000)
+
+name_destination = st.sidebar.text_input("nameDest")
+old_balance_dest = st.sidebar.number_input("oldbalanceDest", 1, 100000000000, 1000)
+new_balance_dest = st.sidebar.number_input("newbalanceDest", 1, 100000000000, 1000)
+
 
 flagged_fraud = st.sidebar.selectbox(label="Flags illegal attempts to transfer more than 200.000 in a single "
                                            "transaction",
-                                     options=["True", "False"])
+                                     options=["true", "false"])
 
 flagged_dict = {
-    "True": 1,
-    "False": 0
+    "true": 1,
+    "false": 0
 }
 
 data = pd.DataFrame([{
     "type": payment_type,
     "step": unit_of_time,
     "amount": transaction_amount,
-    "nameOrig": "LKSJDF",
+    "nameOrig": name_origin,
     "oldbalanceOrg": old_balance_org,
     "newbalanceOrig": new_balance_org,
-    "nameDest": "LKSF",
+    "nameDest": name_destination,
     "oldbalanceDest": old_balance_dest,
     "newbalanceDest": new_balance_dest,
     "isFlaggedFraud": flagged_dict[flagged_fraud]
