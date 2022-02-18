@@ -38,5 +38,5 @@ COPY --chown=ml:ml . .
 
 EXPOSE 8501
 
-RUN chmod +x /usr/src/app/run.sh
-ENTRYPOINT /usr/src/app/run.sh
+ENTRYPOINT ["streamlit", "run"]
+CMD ["app.py"]
