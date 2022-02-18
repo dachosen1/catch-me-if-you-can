@@ -48,10 +48,10 @@ data = pd.DataFrame([{
 if st.sidebar.button('Run'):
 
     st.info(""" 
-    The application uses a light GPM model to classify transactions as Fraud!  
+    The application uses a lightGBM model to classify transactions as fraud!  
             """)
 
-    st.info("""Is the Transaction Fraud? 
+    st.info("""Is the transaction fraud? 
             """)
 
     score = score_model(data=data)
