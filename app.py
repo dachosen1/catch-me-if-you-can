@@ -11,15 +11,15 @@ st.markdown("The financial services sector is one of the first in line to pick u
             "for human analysts, due to their complexity, speed and scale. In this scenario you will use a dataset "
             "created specifically for fraud detection in financial services.")
 
-unit_of_time = st.sidebar.number_input('step', 0, 100000000000000, 250)
+
 transaction_amount = st.sidebar.number_input('amount', 0, 100000000000, 1000)
 payment_type = st.sidebar.selectbox(label="Type", options=["TRANSFER", "CASH-IN", "CASH-OUT", "DEBIT", "PAYMENT"])
 
-name_origin = st.sidebar.text_input("nameOrig", "C353296011")
+
 old_balance_org = st.sidebar.number_input("oldbalanceOrg", 0, 100000000000, 105867)
 new_balance_org = st.sidebar.number_input("newbalanceOrig", 0, 100000000000, 90540)
 
-name_destination = st.sidebar.text_input("nameDest", "C1182908789")
+
 old_balance_dest = st.sidebar.number_input("oldbalanceDest", 0, 100000000000, 0)
 new_balance_dest = st.sidebar.number_input("newbalanceDest", 0, 100000000000, 0)
 
@@ -34,12 +34,12 @@ flagged_dict = {
 
 data = pd.DataFrame([{
     "type": payment_type,
-    "step": unit_of_time,
+    "step": 250,
     "amount": transaction_amount,
-    "nameOrig": name_origin,
+    "nameOrig": "C353296011",
     "oldbalanceOrg": old_balance_org,
     "newbalanceOrig": new_balance_org,
-    "nameDest": name_destination,
+    "nameDest": "C1182908789",
     "oldbalanceDest": old_balance_dest,
     "newbalanceDest": new_balance_dest,
     "isFlaggedFraud": flagged_dict[flagged_fraud]
