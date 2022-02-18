@@ -25,18 +25,18 @@ jobs:
           tags: catchmeifyoucan.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_df8de8814754452e9fc2e072ae00d3b2 }}/anamoly-detection-app:${{ github.sha }}
           file: ./Dockerfile
 
-    deploy:
-      runs-on: ubuntu-latest
-      needs: build
-      environment:
-        name: 'production'
-        url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-      steps:
-        - name: Deploy to Azure Web App
-          id: deploy-to-webapp
-          uses: azure/webapps-deploy@v2
-          with:
-            app-name: 'catchmeifyoucan001'
-            slot-name: 'production'
-            publish-profile: ${{ secrets.AzureAppService_PublishProfile_530348ff4ec5413283828600fba7b401 }}
-            images: 'catchmeifyoucan.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_df8de8814754452e9fc2e072ae00d3b2 }}/anamoly-detection-app:${{ github.sha }}'
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    steps:
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'catchmeifyoucan001'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_530348ff4ec5413283828600fba7b401 }}
+          images: 'catchmeifyoucan.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_df8de8814754452e9fc2e072ae00d3b2 }}/anamoly-detection-app:${{ github.sha }}'
