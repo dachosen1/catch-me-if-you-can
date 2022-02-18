@@ -1,3 +1,4 @@
+import altair as alt
 import numpy as np
 import pandas as pd
 import plotly.figure_factory as ff
@@ -14,6 +15,35 @@ st.markdown("The financial services sector is one of the first in line to pick u
 
 unit_of_time = st.sidebar.number_input('Unit of time in the real world', 1, 1000, 100)
 transaction_amount = st.sidebar.number_input('Amount of the Transaction', 1, 100000000000, 1000)
+payment_type = st.sidebar.selectbox(label="Payment Type", options=["Cash-In", "Cash-Out", "Debit", "Payment", "Transfer"])
+
+old_balance_org = st.sidebar.number_input("Initial balance before the transaction", 1, 100000000000, 1000)
+new_balance_org = st.sidebar.number_input("customer's balance after the transaction", 1, 100000000000, 1000)
+
+old_balance_dest = st.sidebar.number_input("Initial recipient balance before the transaction", 1, 100000000000, 1000)
+new_balance_dest = st.sidebar.number_input("Recipient's balance after the transaction", 1, 100000000000, 1000)
+
+flagged_fraud = st.sidebar.selectbox(label="Flags illegal attempts to transfer more than 200.000 in a single "
+                                           "transaction",
+                                     options=["True", "False"])
+
+flagged_dict = {
+    "True": 1,
+    "False": 0
+}
+
+data = pd.DataFrame([{
+    "type": payment_type,
+    "step": unit_of_time,
+    "amount": transaction_amount,
+    "nameOrig": "LKSJDF",
+    "oldbalanceOrg": old_balance_org,
+    "newbalanceOrig": new_balance_org,
+    "nameDest": "LKSF",
+    "oldbalanceDest": old_balance_dest,
+    "newbalanceDest": new_balance_dest,
+    "isFlaggedFraud": flagged_dict[flagged_fraud]
+}])
 
 with st.form("my_form"):
     st.write("Data Exploration Results")
@@ -22,7 +52,6 @@ with st.form("my_form"):
     # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if submitted:
-
         st.write("sample chart")
         chart_data = pd.DataFrame(
             np.random.randn(50, 3),
@@ -54,10 +83,6 @@ with st.form("my_form"):
             x='a', y='b', size='c', color='c', tooltip=['a', 'b', 'c'])
 
         st.altair_chart(c, use_container_width=True)
-
-st.sidebar.selectbox(label="Payment Type", options=["Cash-In", "Cash-Out", "Debit", "Payment", "Transfer"])
-old_balance = st.sidebar.number_input("Initial balance before the transaction", 1, 100000000000, 1000)
-new_balance = st.sidebar.number_input("customer's balance after the transaction", 1, 100000000000, 1000)
 
 if st.sidebar.button('Run'):
     st.info("""The Machine Learning Algorithm predicts the following based on the selected input 
