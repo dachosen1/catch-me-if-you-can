@@ -2,12 +2,12 @@ FROM python:3.8.6-slim-buster
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED True
+ARG DATABRICKS_TOKEN={$DATABRICKS_TOKEN}
 
 RUN apt-get update -qq \
  && apt-get install -qqy --no-install-recommends \
-      gcc \
       python3-dev \
- && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/*y \
 
 WORKDIR /usr/src/app
 
@@ -22,7 +22,6 @@ RUN addgroup --gid 1000 ml \
 
 COPY ./requirements.txt .
 
-RUN pip3 install --upgrade pip
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY . .
@@ -37,9 +36,7 @@ ENV PATH="/usr/src/app/.local/bin:$PATH"
 
 COPY --chown=ml:ml . .
 
-#RUN chmod +x /usr/src/app/run.sh
-
 EXPOSE 8501
 
-ENTRYPOINT ["streamlit", "run"]
-CMD ["app.py"]
+RUN chmod +x /usr/src/app/run.sh
+ENTRYPOINT /usr/src/app/run.sh
