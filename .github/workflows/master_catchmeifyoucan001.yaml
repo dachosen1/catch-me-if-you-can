@@ -15,14 +15,14 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: https://catchmeifyoucan.azurecr.io/
-          username: ${{ secrets.AzureAppService_ContainerUsername_df8de8814754452e9fc2e072ae00d3b2 }}
-          password: ${{ secrets.AzureAppService_ContainerPassword_c2e5049bd1f942a9a15b1ff6f71023d9 }}
+          username: ${{ secrets.AZURE_USERNAME }}
+          password: ${{ secrets.AZURE_PASSWORD }}
       - name: Build and push container image to registry
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: catchmeifyoucan.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_df8de8814754452e9fc2e072ae00d3b2 }}/anamoly-detection-app:${{ github.sha }}
+          tags: catchmeifyoucan.azurecr.io/${{ secrets.AZURE_USERNAME }}/anamoly-detection-app:${{ github.sha }}
           file: ./Dockerfile
 
   deploy:
@@ -38,5 +38,5 @@ jobs:
         with:
           app-name: 'catchmeifyoucan001'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_530348ff4ec5413283828600fba7b401 }}
+          publish-profile: ${{ secrets.AZURE_USERNAME }}
           images: 'catchmeifyoucan.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_df8de8814754452e9fc2e072ae00d3b2 }}/anamoly-detection-app:${{ github.sha }}'
