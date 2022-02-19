@@ -39,4 +39,4 @@ jobs:
           app-name: 'catchmeifyoucan001'
           slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_USERNAME }}
-          images: 'catchmeifyoucan.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_df8de8814754452e9fc2e072ae00d3b2 }}/anamoly-detection-app:${{ github.sha }}'
+          images: 'catchmeifyoucan.azurecr.io/${{ secrets.AZURE_USERNAME }}/anamoly-detection-app:${{ github.sha }}'
