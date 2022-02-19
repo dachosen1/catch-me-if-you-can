@@ -3,7 +3,7 @@ import streamlit as st
 
 from model import score_model
 
-st.title("Accenture Hackathon")
+st.title("Fraud Detection Hackathon")
 st.markdown("**Team**: Catch me if you can")
 st.markdown("**Problem Statement**: Anomaly detection for financial services")
 st.markdown("The financial services sector is one of the first in line to pick up the benefits of AI and Machine "
